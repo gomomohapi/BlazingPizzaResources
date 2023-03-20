@@ -1,0 +1,685 @@
+{
+"openapi": "3.0.1",
+"info": {
+"title": "OpenAPI definition",
+"version": "v0"
+},
+"servers": [
+{
+"url": "https://app-api-a7cb4zp7xzrq4.azurewebsites.net",
+"description": "Generated server url"
+}
+],
+"tags": [
+{
+"name": "Items",
+"description": "the Items API"
+},
+{
+"name": "Lists",
+"description": "the Lists API"
+}
+],
+"paths": {
+"/lists/{listId}": {
+"get": {
+"tags": [
+"Lists"
+],
+"summary": "Gets a Todo list by unique identifier",
+"operationId": "getListById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "A Todo list result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+},
+"404": {
+"description": "Todo list not found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"Lists"
+],
+"summary": "Updates a Todo list by unique identifier",
+"operationId": "updateListById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "A Todo list result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+},
+"400": {
+"description": "Todo list is invalid",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+},
+"404": {
+"description": "Todo list not found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Lists"
+],
+"summary": "Deletes a Todo list by unique identifier",
+"operationId": "deleteListById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"204": {
+"description": "Todo list deleted successfully"
+},
+"404": {
+"description": "Todo list not found"
+}
+}
+}
+},
+"/lists/{listId}/items/{itemId}": {
+"get": {
+"tags": [
+"Items"
+],
+"summary": "Gets a Todo item by unique identifier",
+"operationId": "getItemById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "itemId",
+"in": "path",
+"description": "The Todo item unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "A Todo item result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"404": {
+"description": "Todo list or item not found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"Items"
+],
+"summary": "Updates a Todo item by unique identifier",
+"operationId": "updateItemById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "itemId",
+"in": "path",
+"description": "The Todo item unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "A Todo item result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"400": {
+"description": "Todo item is invalid",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"404": {
+"description": "Todo list or item not found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Items"
+],
+"summary": "Deletes a Todo item by unique identifier",
+"operationId": "deleteItemById",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "itemId",
+"in": "path",
+"description": "The Todo item unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"204": {
+"description": "Todo item deleted successfully"
+},
+"404": {
+"description": "Todo list or item not found"
+}
+}
+}
+},
+"/lists/{listId}/items/state/{state}": {
+"get": {
+"tags": [
+"Items"
+],
+"summary": "Gets a list of Todo items of a specific state",
+"operationId": "getItemsByListIdAndState",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "state",
+"in": "path",
+"description": "The Todo item state",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "top",
+"in": "query",
+"description": "The max number of items to returns in a result",
+"required": false,
+"schema": {
+"type": "number",
+"default": 20
+}
+},
+{
+"name": "skip",
+"in": "query",
+"description": "The number of items to skip within the results",
+"required": false,
+"schema": {
+"type": "number",
+"default": 0
+}
+}
+],
+"responses": {
+"200": {
+"description": "An array of Todo items",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"404": {
+"description": "Todo list or item not found",
+"content": {
+"application/json": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"Items"
+],
+"summary": "Changes the state of the specified list items",
+"operationId": "updateItemsStateByListId",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "state",
+"in": "path",
+"description": "The Todo item state",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"type": "array",
+"description": "unique identifiers of the Todo items to update",
+"items": {
+"type": "string"
+}
+}
+}
+}
+},
+"responses": {
+"204": {
+"description": "Todo items updated"
+},
+"400": {
+"description": "Update request is invalid"
+}
+}
+}
+},
+"/lists": {
+"get": {
+"tags": [
+"Lists"
+],
+"summary": "Gets an array of Todo lists",
+"operationId": "getLists",
+"parameters": [
+{
+"name": "top",
+"in": "query",
+"description": "The max number of items to returns in a result",
+"required": false,
+"schema": {
+"type": "number",
+"default": 20
+}
+},
+{
+"name": "skip",
+"in": "query",
+"description": "The number of items to skip within the results",
+"required": false,
+"schema": {
+"type": "number",
+"default": 0
+}
+}
+],
+"responses": {
+"200": {
+"description": "An array of Todo lists",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"Lists"
+],
+"summary": "Creates a new Todo list",
+"operationId": "createList",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+},
+"responses": {
+"201": {
+"description": "A Todo list result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+},
+"400": {
+"description": "Invalid request schema",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoList"
+}
+}
+}
+}
+}
+}
+},
+"/lists/{listId}/items": {
+"get": {
+"tags": [
+"Items"
+],
+"summary": "Gets Todo items within the specified list",
+"operationId": "getItemsByListId",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "top",
+"in": "query",
+"description": "The max number of items to returns in a result",
+"required": false,
+"schema": {
+"type": "number",
+"default": 20
+}
+},
+{
+"name": "skip",
+"in": "query",
+"description": "The number of items to skip within the results",
+"required": false,
+"schema": {
+"type": "number",
+"default": 0
+}
+}
+],
+"responses": {
+"200": {
+"description": "An array of Todo items",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"404": {
+"description": "Todo list not found",
+"content": {
+"application/json": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"Items"
+],
+"summary": "Creates a new Todo item within a list",
+"operationId": "createItem",
+"parameters": [
+{
+"name": "listId",
+"in": "path",
+"description": "The Todo list unique identifier",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"responses": {
+"201": {
+"description": "A Todo item result",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+},
+"404": {
+"description": "Todo list not found",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/TodoItem"
+}
+}
+}
+}
+}
+}
+}
+},
+"components": {
+"schemas": {
+"TodoList": {
+"required": [
+"name"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"description": {
+"type": "string"
+}
+},
+"description": " A list of related Todo items"
+},
+"TodoItem": {
+"required": [
+"description",
+"listId",
+"name"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"listId": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"state": {
+"type": "string",
+"enum": [
+"todo",
+"inprogress",
+"done"
+]
+},
+"dueDate": {
+"type": "string",
+"format": "date-time"
+},
+"completedDate": {
+"type": "string",
+"format": "date-time"
+}
+},
+"description": "A task that needs to be completed"
+}
+}
+}
+}
